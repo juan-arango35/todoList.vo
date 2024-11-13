@@ -1,8 +1,12 @@
+import { useContext } from "react"
+import { ContextTask } from "../context/ContexTask"
 
 
-const Tareas = ({filtarTarea, switchTarea, eliminarTarea}) => {
+const Tareas = ({children}) => {
+  const {filtarTarea, switchTarea, eliminarTarea}=useContext(ContextTask)
   return (
     <div className="flex-grow w-full overflow-y-auto flex justify-center">
+      <div>{children}</div>
 
     <ul className="mt-5">
         {filtarTarea.map((item) => (

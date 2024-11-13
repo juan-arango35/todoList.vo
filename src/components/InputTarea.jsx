@@ -1,6 +1,11 @@
-const InputTarea = ({ agregatarea, nuevatarea, setNuevatarea }) => {
+import { useContext } from "react";
+import { ContextTask } from "../context/ContexTask";
+
+const InputTarea = ({children}) => {
+  const { agregatarea, nuevatarea, setNuevatarea }=useContext(ContextTask)
   return (
     <div>
+      <div>{children}</div>
       <input
         type="text"
         value={nuevatarea}
