@@ -2,6 +2,8 @@
 
 const Tareas = ({filtarTarea, switchTarea, eliminarTarea}) => {
   return (
+    <div className="flex-grow w-full overflow-y-auto flex justify-center">
+
     <ul className="mt-5">
         {filtarTarea.map((item) => (
           <li key={item.id}
@@ -27,6 +29,7 @@ const Tareas = ({filtarTarea, switchTarea, eliminarTarea}) => {
           </li>
         ))}
       </ul>
+    </div>
   )
 }
 

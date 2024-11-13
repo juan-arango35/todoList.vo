@@ -2,7 +2,7 @@
 
 const Title = () => {
   return (
-    <div className="text-2xl font-bold -mt-8">Lista de Tareas Actualizada</div>
+    <div className="text-2xl font-bold mt-3">Lista de Tareas Actualizada</div>
   )
 }
 
