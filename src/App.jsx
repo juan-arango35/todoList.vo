@@ -65,25 +65,24 @@ const App = () => {
 
   return (
     <div className="w-screen h-screen bg-white-700 flex justify-center items-center flex-col">
-      <Title />
+      <div className="bg-white-300 h-80 w-4/5 border divide-slate-700 rounded-2xl  shadow-lg shadow-black-500/50 flex flex-col items-center justify-center">
+        <Title />
 
-      <div className="flex space-x-2 mb-4">
         <InputTarea
           nuevatarea={nuevatarea}
           agregatarea={agregatarea}
           setNuevatarea={setNuevatarea}
         />
+
+        <Select filtar={filtar} setFiltar={setFiltar} />
+
+        <Tareas
+          filtarTarea={filtarTarea}
+          switchTarea={switchTarea}
+          eliminarTarea={eliminarTarea}
+        />
+        <Result tareaNumero={tareaNumero} />
       </div>
-      <Select filtar={filtar} setFiltar={setFiltar} />
-
-      <Tareas
-        filtarTarea={filtarTarea}
-        switchTarea={switchTarea}
-        eliminarTarea={eliminarTarea}
-      />
-      <Result tareaNumero={tareaNumero}/>
-
-     
     </div>
   );
 };
