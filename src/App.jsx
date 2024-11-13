@@ -1,4 +1,10 @@
 import { useEffect, useState } from "react";
+import Title from "./components/Title";
+import InputTarea from "./components/InputTarea";
+import Select from "./components/Select";
+import Result from "./components/Result";
+import Tareas from "./components/Tareas";
+
 const App = () => {
   const [tareas, setTareas] = useState([]);
   const [nuevatarea, setNuevatarea] = useState("");
@@ -20,13 +26,12 @@ const App = () => {
     });
   }, [tareas]);
 
-  
   console.log(tareaNumero, "tareanumero");
 
   //funcion para añadir una nueva tarea
   const agregatarea = () => {
     if (nuevatarea.trim() !== "") {
-      setTareas(prevTareas => [
+      setTareas((prevTareas) => [
         ...prevTareas,
         {
           id: Date.now(),
@@ -40,7 +45,7 @@ const App = () => {
 
   //funcion para cambiar de estado una tarea
   const switchTarea = (id) => {
-    setTareas(prevTareas =>
+    setTareas((prevTareas) =>
       prevTareas.map((tarea) =>
         tarea.id === id ? { ...tarea, completada: !tarea.completada } : tarea
       )
@@ -49,9 +54,9 @@ const App = () => {
 
   //fucnion para eliminar tarea
   const eliminarTarea = (id) => {
-    setTareas(prevTareas => prevTareas.filter((tarea) => tarea.id !== id));
+    setTareas((prevTareas) => prevTareas.filter((tarea) => tarea.id !== id));
   };
-  
+
   const filtarTarea = tareas.filter((tarea) => {
     if (filtar === "activa") return !tarea.completada;
     if (filtar === "completada") return tarea.completada;
@@ -59,54 +64,25 @@ const App = () => {
   });
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
-      <div>
-        <h1 className="text-2xl font-bold text-center">Lista de tareas</h1>
-      </div>
+    <div className="w-screen h-screen bg-white-700 flex justify-center items-center flex-col">
+      <Title />
+
       <div className="flex space-x-2 mb-4">
-        <input
-          type="text"
-          value={nuevatarea}
-          onChange={(e) => setNuevatarea(e.target.value)}
-          placeholder="Nueva tarea"
-          onKeyDown={(e) => e.key === "Enter" && agregatarea()}
+        <InputTarea
+          nuevatarea={nuevatarea}
+          agregatarea={agregatarea}
+          setNuevatarea={setNuevatarea}
         />
-        <button onClick={agregatarea}>Añadir</button>
       </div>
-      <select value={filtar} onChange={(e) => setFiltar(e.target.value)}>
-        <option value="all">Todas</option>
-        <option value="activa">Activas</option>
-        <option value="completada">Completadas</option>
-      </select>
+      <Select filtar={filtar} setFiltar={setFiltar} />
 
-      <ul>
-        {filtarTarea.map((item) => (
-          <li key={item.id}>
-            <input
-              type="checkbox"
-              checked={item.completada}
-              onChange={() => switchTarea(item.id)}
-              id={`tarea-${item.id}`}
-            />
-            <label
-              htmlFor={`tarea-${item.id}`}
-              className={`${
-                item.completada ? "line-through text-gray-500" : ""
-              }`}
-            >
-              {item.texto}
-            </label>
-            <button onClick={() => eliminarTarea(item.id)}>Eliminar</button>
-          </li>
-        ))}
-      </ul>
+      <Tareas
+        filtarTarea={filtarTarea}
+        switchTarea={switchTarea}
+        eliminarTarea={eliminarTarea}
+      />
+      <Result tareaNumero={tareaNumero}/>
 
-      <div className="mt-4 text-sm text-gray-600">
-        {console.log(tareaNumero, "tareanumero")}
-        <p>Total: {tareaNumero.total}</p>
-        <p>Activas: {tareaNumero.activa}</p>
-        <p>Completadas: {tareaNumero.completada}</p>
-      </div>
      
     </div>
   );
