@@ -65,7 +65,7 @@ const App = () => {
 
   return (
     <div className="w-screen h-screen bg-white-700 flex justify-center items-center flex-col">
-      <div className="bg-white-300 h-80 w-4/5 border divide-slate-700 rounded-2xl  shadow-lg shadow-black-500/50 flex flex-col items-center justify-center">
+      <div className="bg-white-300 h-4/5 w-4/5 border divide-slate-700 rounded-2xl  shadow-lg shadow-black-500/50 flex flex-col items-center justify-center">
         <Title />
 
         <InputTarea
